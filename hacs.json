@@ -7,6 +7,6 @@
     "verification": {
         "provider": "sigstore",
         "workflow": "release.yml",
-        "name": "Publish"
+        "name": "Release"
     }
 }
