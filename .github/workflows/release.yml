@@ -26,13 +26,9 @@ jobs:
         with:
           inputs: ${{ github.workspace }}/custom_components/sigstore_test/sigstore_test.zip
 
-      - name: List root files
-        run: ls
-
-      - name: List integration files
-        run: ls  ${{ github.workspace }}/custom_components/sigstore_test
-
       - name: Upload zip to release
         uses: softprops/action-gh-release@v0.1.15
         with:
-          files: ${{ github.workspace }}/custom_components/sigstore_test/sigstore_test.zip
+          files: |
+            ${{ github.workspace }}/custom_components/sigstore_test/sigstore_test.zip
+            ${{ github.workspace }}/custom_components/sigstore_test/sigstore_test.zip.sigstore
