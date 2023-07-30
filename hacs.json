@@ -1,0 +1,12 @@
+{
+    "name": "Sigstore Test",
+    "filename": "sigstore_test.zip",
+    "hide_default_branch": true,
+    "render_readme": true,
+    "zip_release": true,
+    "verification": {
+        "provider": "sigstore",
+        "workflow": "release.yml",
+        "name": "Publish"
+    }
+}

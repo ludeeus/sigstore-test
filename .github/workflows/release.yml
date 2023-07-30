@@ -1,0 +1,38 @@
+name: "Release"
+
+
+on: 
+  release:
+    types:
+      - published
+
+jobs:
+  publish:
+    name: "Publish"
+    runs-on: "ubuntu-latest"
+    permissions:
+      contents: write # Upload zip file
+      id-token: write # Use OIDC for sigstore signing
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@v3.5.3
+
+      - name: Zip integration directory
+        run: |
+          cd ${{ github.workspace }}/custom_components/sigstore_test
+          zip sigstore_test.zip -r ./
+
+      - uses: sigstore/gh-action-sigstore-python@v1.2.3
+        with:
+          inputs: ${{ github.workspace }}/custom_components/sigstore_test/sigstore_test.zip
+
+      - name: List root files
+        run: ls
+
+      - name: List integration files
+        run: ls  ${{ github.workspace }}/custom_components/sigstore_test
+
+      - name: Upload zip to release
+        uses: softprops/action-gh-release@v0.1.15
+        with:
+          files: ${{ github.workspace }}/custom_components/sigstore_test/sigstore_test.zip
